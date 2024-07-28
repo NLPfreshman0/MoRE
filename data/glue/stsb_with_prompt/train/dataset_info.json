@@ -1,0 +1,62 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "stsb",
+  "dataset_name": "glue",
+  "dataset_size": 1142989,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/glue@bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/stsb/train-00000-of-00001.parquet": {
+      "num_bytes": 502065,
+      "checksum": null
+    },
+    "hf://datasets/glue@bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/stsb/validation-00000-of-00001.parquet": {
+      "num_bytes": 150622,
+      "checksum": null
+    },
+    "hf://datasets/glue@bcdcba79d07bc864c1c254ccfcedcce55bcc9a8c/stsb/test-00000-of-00001.parquet": {
+      "num_bytes": 114296,
+      "checksum": null
+    }
+  },
+  "download_size": 766983,
+  "features": {
+    "prompt": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "label": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 1909972,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 756229,
+      "num_examples": 5749,
+      "dataset_name": "glue"
+    },
+    "validation": {
+      "name": "validation",
+      "num_bytes": 216440,
+      "num_examples": 1500,
+      "dataset_name": "glue"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 170320,
+      "num_examples": 1379,
+      "dataset_name": "glue"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
