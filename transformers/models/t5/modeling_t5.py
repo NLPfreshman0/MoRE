@@ -1802,7 +1802,7 @@ class T5ForConditionalGeneration(T5PreTrainedModel):
             output = (lm_logits,) + decoder_outputs[1:] + encoder_outputs
             return ((loss,) + output) if loss is not None else output
         if encoder_outputs.cl_loss and encoder_outputs.cl_loss:
-            loss += 0.5 * (encoder_outputs.cl_loss + encoder_outputs.cl_loss) / 2
+            loss += 0.1 * (encoder_outputs.cl_loss + encoder_outputs.cl_loss) / 2
         #print((encoder_outputs.cl_loss + encoder_outputs.cl_loss) / 2, loss)
         return Seq2SeqLMOutput(
             loss=loss,
