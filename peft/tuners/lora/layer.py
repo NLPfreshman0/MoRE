@@ -544,12 +544,26 @@ class Linear(nn.Module, LoraLayer):
                     approximated_logits = self.straight_through_argmax(expert_logits)
                     expert_ids = torch.argmax(approximated_logits)
                     lora_A, lora_B = self.lora_A[active_adapter].weight[:expert_ids+1, :], self.lora_B[active_adapter].weight[:, :expert_ids+1]
+                    
+                    scaling_factors = torch.tensor([0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0])
+                    scaling_factors_A = scaling_factors[:lora_A.size(0)].unsqueeze(1)
+                    scaling_factors_B = scaling_factors[:lora_B.size(1)].unsqueeze(0)
+                    lora_A = lora_A * scaling_factors_A.to(lora_A.device)
+                    lora_B = lora_B * scaling_factors_B.to(lora_B.device)
+                    
                     x = x.to(lora_A.dtype)
                     output = (dropout(x) @ lora_A.t()) @ lora_B.t() * approximated_logits[expert_ids]
                     
                 else:
                     expert_ids = self.task_map[get_task_id()]
                     lora_A, lora_B = self.lora_A[active_adapter].weight[:expert_ids+1, :], self.lora_B[active_adapter].weight[:, :expert_ids+1]
+                    
+                    scaling_factors = torch.tensor([0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1.0])
+                    scaling_factors_A = scaling_factors[:lora_A.size(0)].unsqueeze(1)
+                    scaling_factors_B = scaling_factors[:lora_B.size(1)].unsqueeze(0)
+                    lora_A = lora_A * scaling_factors_A.to(lora_A.device)
+                    lora_B = lora_B * scaling_factors_B.to(lora_B.device)
+                    
                     x = x.to(lora_A.dtype)
                     output = (dropout(x) @ lora_A.t()) @ lora_B.t()
                 
